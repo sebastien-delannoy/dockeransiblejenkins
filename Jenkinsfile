@@ -22,17 +22,17 @@ pipeline{
         
         stage('Docker Build'){
             steps{
-                sh "docker build . -t sebastiendelannoy/helloapp:${DOCKER_TAG} "
+                sh "sudo docker build . -t sebastiendelannoy/helloapp:${DOCKER_TAG} "
             }
         }
         
         stage('DockerHub Push'){
             steps{
                 withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPwd')]) {
-                    sh "docker login -u sebastiendelannoy -p:test12345"
+                    sh "sudo docker login -u sebastiendelannoy -p:test12345"
                 }
                 
-                sh "docker push sebastiendelannoy/helloapp:15 "
+                sh "sudo docker push sebastiendelannoy/helloapp:15 "
             }
         }
         
