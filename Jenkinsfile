@@ -5,6 +5,7 @@ pipeline{
     }
     environment {
       DOCKER_TAG = getVersion()
+        dockerImage = ''
     }
     stages{
         stage('SCM'){
