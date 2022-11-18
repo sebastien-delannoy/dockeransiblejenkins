@@ -6,6 +6,7 @@ pipeline{
     environment {
       DOCKER_TAG = getVersion()
         dockerImage = ''
+        registry = "sebastiendelannoy/helloapp"
     }
     stages{
         stage('SCM'){
