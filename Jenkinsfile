@@ -38,7 +38,7 @@ pipeline{
         
         stage('Docker Deploy'){
             steps{
-              ansiblePlaybook become: true, disableHostKeyChecking: true, inventory: 'dev.inv', playbook: 'deploy-docker.yml'
+              ansiblePlaybook become: true,  inventory: 'dev.inv', playbook: 'deploy-docker.yml'
             }
         }
     }
