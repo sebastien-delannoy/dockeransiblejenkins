@@ -24,7 +24,7 @@ pipeline{
         
         stage('Docker Build'){
             steps{
-                sh "docker build . -t sebastiendelannoy/hariapp:${DOCKER_TAG} "
+                sh "docker build . sebastiendelannoy/helloapp:${DOCKER_TAG} "
             }
         }
         
@@ -34,7 +34,7 @@ pipeline{
                     sh "docker login -u sebastiendelannoy -p ${dockerHubPwd}"
                 }
                 
-                sh "docker push sebastiendelannoy/hariapp:${DOCKER_TAG} "
+                sh "docker push sebastiendelannoy/helloapp:${DOCKER_TAG} "
             }
         }
         
