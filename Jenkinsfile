@@ -38,7 +38,7 @@ pipeline{
         
         stage('Docker Deploy'){
             steps{
-             ansiblePlaybook credentialsId: 'd7f742e9-fbba-426a-a75d-0a618bd2f71e', installation: 'ANSIBLE', inventory: 'dev.inv', playbook: 'deploy-docker.yml'
+             ansiblePlaybook credentialsId: 'devssh', disableHostKeyChecking: true, extras: 'DOCKER_TAG', installation: 'ANSIBLE', inventory: 'dev.inv', playbook: 'deploy-docker.yml'
             }
         }
     }
