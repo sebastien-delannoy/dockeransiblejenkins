@@ -7,6 +7,7 @@ pipeline{
       DOCKER_TAG = getVersion()
         dockerImage = ''
         registry = "sebastiendelannoy/helloapp"
+        registryCredential = 'git'
     }
     stages{
         stage('SCM'){
@@ -24,8 +25,12 @@ pipeline{
         
         stage('Docker Build'){
             steps{
-                sh "docker build . -t kammana/hariapp:${DOCKER_TAG} "
+                script {
+                dockerImage = docker.build registry + ":$BUILD_NUMBER"
+}
+               
             }
+            
         }
         
         stage('DockerHub Push'){
