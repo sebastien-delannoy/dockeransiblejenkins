@@ -7,6 +7,9 @@ pipeline{
     }
     environment {
       DOCKER_TAG = getVersion()
+      registry = "sebastiendelannoy/helloapp"
+      registryCredential = 'git'
+      dockerImage = ''
     }
     stages{
         stage('SCM'){
@@ -22,11 +25,14 @@ pipeline{
             }
         }
         
-        stage('Docker Build'){
+        stage('Building our image') {
             steps{
-                sh "docker build . sebastiendelannoy/hello-docker:${DOCKER_TAG} "
+            script {
+                dockerImage = docker.build registry + ":$BUILD_NUMBER"
             }
-        }
+            }
+        
+     
         
         stage('DockerHub Push'){
             steps{
