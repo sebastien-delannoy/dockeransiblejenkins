@@ -1,3 +1,5 @@
+def dockerHubPwd = Test12345"
+
 pipeline{
     agent any
     tools {
@@ -22,17 +24,17 @@ pipeline{
         
         stage('Docker Build'){
             steps{
-                sh "sudo docker build . -t sebastiendelannoy/helloapp:${DOCKER_TAG} "
+                sh "docker build . -t sebastiendelannoy/hariapp:${DOCKER_TAG} "
             }
         }
         
         stage('DockerHub Push'){
             steps{
                 withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPwd')]) {
-                    sh "sudo docker login -u sebastiendelannoy -p:test12345"
+                    sh "docker login -u sebastiendelannoy -p ${dockerHubPwd}"
                 }
                 
-                sh "sudo docker push sebastiendelannoy/helloapp:15 "
+                sh "docker push sebastiendelannoy/hariapp:${DOCKER_TAG} "
             }
         }
         
