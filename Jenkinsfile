@@ -1,4 +1,4 @@
-def dockerHubPwd = Test12345"
+def dockerHubPwd = "Test12345"
 
 pipeline{
     agent any
