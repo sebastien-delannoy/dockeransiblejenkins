@@ -1,5 +1,3 @@
-def dockerHubPwd = "Test12345"
-
 pipeline{
     agent any
     tools {
@@ -7,13 +5,12 @@ pipeline{
     }
     environment {
       DOCKER_TAG = getVersion()
-      
     }
     stages{
         stage('SCM'){
             steps{
                 git credentialsId: 'github', 
-                    url: 'https://github.com/sebastien-delannoy/dockeransiblejenkins.git'
+                    url: 'https://github.com/sebastiendelannoy/dockeransiblejenkins'
             }
         }
         
@@ -23,22 +20,19 @@ pipeline{
             }
         }
         
-        stage('Building our image') {
+        stage('Docker Build'){
             steps{
-            script {
-                dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                sh "docker build . -t kammana/hariapp:${DOCKER_TAG} "
             }
-            }
-        
-     
+        }
         
         stage('DockerHub Push'){
             steps{
                 withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPwd')]) {
-                    sh "docker login -u sebastiendelannoy -p ${dockerHubPwd}"
+                    sh "docker login -u kammana -p ${dockerHubPwd}"
                 }
                 
-                sh "docker push sebastiendelannoy/helloapp:${DOCKER_TAG} "
+                sh "docker push kammana/hariapp:${DOCKER_TAG} "
             }
         }
         
