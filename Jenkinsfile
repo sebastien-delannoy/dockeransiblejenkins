@@ -38,7 +38,7 @@ pipeline{
         
         stage('Docker Deploy'){
             steps{
-              ansiblePlaybook become: true,  inventory: 'dev.inv', playbook: 'deploy-docker.yml'
+              ansiblePlaybook installation: 'ANSIBLE', inventory: 'dev.inv', playbook: 'deploy-docker.yml'
             }
         }
     }
