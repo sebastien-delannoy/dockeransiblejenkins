@@ -14,7 +14,7 @@ pipeline {
     stage('Building image') {
       steps{
        
-         sh "docker build ."
+         sh "sudo docker build ."
        
       }
     }
