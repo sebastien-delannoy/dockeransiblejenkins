@@ -7,9 +7,7 @@ pipeline{
     }
     environment {
       DOCKER_TAG = getVersion()
-      registry = "sebastiendelannoy/helloapp"
-      registryCredential = 'git'
-      dockerImage = ''
+      
     }
     stages{
         stage('SCM'){
