@@ -7,12 +7,6 @@ pipeline{
       DOCKER_TAG = getVersion()
     }
     stages{
-        stage('SCM'){
-            steps{
-                git credentialsId: 'sebastien-delannoy', 
-                    url: 'https://github.com/sebastien-delannoy/dockeransiblejenkins.git'
-            }
-        }
         
         stage('Maven Build'){
             steps{
@@ -20,21 +14,7 @@ pipeline{
             }
         }
         
-        stage('Docker Build'){
-            steps{
-                sh "docker build . -t sebastiendelannoy/helloapp:${DOCKER_TAG} "
-            }
-        }
         
-        stage('DockerHub Push'){
-            steps{
-                withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPwd')]) {
-                    sh "docker login -u kammana -p ${dockerHubPwd}"
-                }
-                
-                sh "docker push kammana/hariapp:${DOCKER_TAG} "
-            }
-        }
         
         stage('Docker Deploy'){
             steps{
