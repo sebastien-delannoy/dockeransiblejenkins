@@ -1,7 +1,6 @@
 ---
 - hosts: all
-  become: yes
-  become_user: root
+  become: true
   become_password: fedoratest
   tasks:
     - name: Install python pip
