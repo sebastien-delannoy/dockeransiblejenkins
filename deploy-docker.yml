@@ -1,7 +1,6 @@
 ---
 - hosts: all
   become: true
-  become_password: fedoratest
   tasks:
     - name: Install python pip
       yum:
